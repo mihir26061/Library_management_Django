@@ -1,0 +1,52 @@
+{% include 'header.html' %}
+
+  <div class="content-wrapper">
+   <section class="content">
+      <div class="container-fluid">
+        <div class="row">
+          <!-- left column -->
+          <div class="col-md-12">
+            <!-- general form elements -->
+            <div class="card card-primary">
+              <div class="card-header">
+                <h3 class="card-title">Add Book</h3>
+              </div>
+              <!-- /.card-header -->
+              <!-- form start -->
+              {% for book in books %}
+              <form action='edit_book?id={{ book.id }}' method="POST">
+                {% csrf_token %}
+
+                    <div class="card-body">
+                      <div class="form-group">
+                        <label >Book Name</label>
+                        <input type="text" name="book_name" class="form-control"  value="{{ book.book_name }}" placeholder="Enter Book Name">
+                      </div>
+                      <div class="form-group">
+                        <label >Author name</label>
+                        <input type="text" name="author_name" class="form-control" value="{{ book.author_name }}" placeholder="Enter Author name">
+                      </div>
+                      <div class="form-group">
+                        <label >Date</label>
+                        <input type="text" disabled name="date" class="form-control" value="{{ book.date }}" placeholder="Enter Date">
+                      </div>
+                    </div>
+                  {% endfor %}
+                <!-- /.card-body -->
+                <div class="card-footer">
+                  <button type="submit" class="btn btn-primary">Submit</button>
+                    <a href="add_book" class="btn btn-primary">Back</a>
+                </div>
+              </form>
+            </div>
+            <!-- /.card -->
+
+          </div>
+          <!--/.col (left) -->
+        </div>
+        <!-- /.row -->
+      </div><!-- /.container-fluid -->
+   </section>
+  </div>
+
+{% include 'footer.html' %}

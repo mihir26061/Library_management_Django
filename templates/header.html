@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="en">
+{% load static %}
+<head>
+  <title>Invoice-Management</title>
+
+  <!-- Google Font: Source Sans Pro -->
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="{% static 'plugins/fontawesome-free/css/all.min.css' %}">
+  <!-- Theme style -->
+  <link rel="stylesheet" href="{% static 'dist/css/adminlte.min.css' %}">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  <style>
+    .dot {
+		margin:0px auto;
+		align-self: center;
+		color: #797979;
+		width:60px;
+		height:30px;
+		--d:radial-gradient(farthest-side,currentColor 90%,#0000);
+		background:var(--d),var(--d),var(--d),var(--d);
+		background-size:12px 12px;
+		background-repeat:no-repeat;
+		animation: m .8s infinite;
+	  }
+	  
+	  @keyframes m {
+		0%   {background-position:calc(0*100%/3) 100%, calc(1*100%/3) 100%, calc(2*100%/3) 100%, calc(3*100%/3) 100%}
+		12.5%{background-position:calc(0*100%/3) 0   , calc(1*100%/3) 100%, calc(2*100%/3) 100%, calc(3*100%/3) 100%}
+		25%  {background-position:calc(0*100%/3) 0   , calc(1*100%/3) 0   , calc(2*100%/3) 100%, calc(3*100%/3) 100%}
+		37.5%{background-position:calc(0*100%/3) 0   , calc(1*100%/3) 0   , calc(2*100%/3) 0   , calc(3*100%/3) 100%}
+		50%  {background-position:calc(0*100%/3) 0   , calc(1*100%/3) 0   , calc(2*100%/3) 0   , calc(3*100%/3) 0   }
+		62.5%{background-position:calc(0*100%/3) 100%, calc(1*100%/3) 0   , calc(2*100%/3) 0   , calc(3*100%/3) 0   }
+		75%  {background-position:calc(0*100%/3) 100%, calc(1*100%/3) 100%, calc(2*100%/3) 0   , calc(3*100%/3) 0   }
+		87.5%{background-position:calc(0*100%/3) 100%, calc(1*100%/3) 100%, calc(2*100%/3) 100%, calc(3*100%/3) 0   }
+		100% {background-position:calc(0*100%/3) 100%, calc(1*100%/3) 100%, calc(2*100%/3) 100%, calc(3*100%/3) 100%}
+	  }
+
+    body{margin-top:20px;
+background:#eee;
+}
+
+/*Invoice*/
+.invoice .top-left {
+    font-size:65px;
+	color:#3ba0ff;
+}
+
+.invoice .top-right {
+	text-align:right;
+	padding-right:20px;
+}
+
+.invoice .table-row {
+	margin-left:-15px;
+	margin-right:-15px;
+	margin-top:25px;
+}
+
+.invoice .payment-info {
+	font-weight:500;
+}
+
+.invoice .table-row .table>thead {
+	border-top:1px solid #ddd;
+}
+
+.invoice .table-row .table>thead>tr>th {
+	border-bottom:none;
+}
+
+/* .invoice .table>tbody>tr>td {
+	padding:8px 20px;
+} */
+
+.invoice .invoice-total {
+	margin-right:-10px;
+	font-size:16px;
+}
+
+.invoice .last-row {
+	border-bottom:1px solid #ddd;
+}
+
+.invoice-ribbon {
+	width:85px;
+	height:88px;
+	overflow:hidden;
+	position:absolute;
+	top:-1px;
+	right:14px;
+}
+
+.ribbon-inner {
+	text-align:center;
+	-webkit-transform:rotate(45deg);
+	-moz-transform:rotate(45deg);
+	-ms-transform:rotate(45deg);
+	-o-transform:rotate(45deg);
+	position:relative;
+	padding:7px 0;
+	left:-5px;
+	top:11px;
+	width:120px;
+	background-color:#66c591;
+	font-size:15px;
+	color:#fff;
+}
+
+.ribbon-inner:before,.ribbon-inner:after {
+	content:"";
+	position:absolute;
+}
+
+.ribbon-inner:before {
+	left:0;
+}
+
+.ribbon-inner:after {
+	right:0;
+}
+#btn_row
+{
+  margin :auto;
+}
+
+/* .col-xs-4 {
+    width: 33.33333333%;
+} */
+
+@media(max-width:575px) {
+	.invoice .top-left,.invoice .top-right,.invoice .payment-details {
+		text-align:center;
+	}
+
+	.invoice .from,.invoice .to,.invoice .payment-details {
+		float:none;
+		width:100%;
+		text-align:center;
+		margin-bottom:25px;
+	}
+
+	.invoice p.lead,.invoice .from p.lead,.invoice .to p.lead,.invoice .payment-details p.lead {
+		font-size:22px;
+	}
+
+	.invoice .btn {
+		margin-top:10px;
+	}
+}
+
+@media print {
+	.invoice {
+		width:900px;
+		height:800px;
+	}
+
+  </style>
+</head>
+<body class="hold-transition sidebar-mini">
+
+
+  <!-- testtttttt -->
+
+  <aside class="main-sidebar sidebar-dark-primary elevation-4" style="min-height: 150%;">
+    <!-- Brand Logo -->
+    <a class="brand-link">
+      <img src="{% static 'dist/img/icon.jpg' %}" alt="AdminLTE Logo" class="brand-image img-circle elevation-3" style="opacity: .9">
+      <span class="brand-text font-weight-light">Library Management</span>
+    </a>
+
+    <!-- Sidebar -->
+    <div class="sidebar">
+      <!-- Sidebar Menu -->
+      <nav class="mt-2">
+        <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
+          <!-- Add icons to the links using the .nav-icon class
+               with font-awesome or any other icon font library -->
+          <li class="nav-item">
+            <a class="nav-link" href="home">
+              <i class="nav-icon fas fa-tachometer-alt"></i>
+              <p>
+                Dashboard
+              </p>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="admin_list">
+              <i class="nav-icon fas fa-edit"></i>
+              <p>
+                Admin
+              </p>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="add_book">
+              <i class="nav-icon fas fa-table"></i>
+              <p>
+                Books
+              </p>
+            </a>
+          </li>
+        </ul>
+      </nav>
+      <!-- /.sidebar-menu -->
+    </div>
+    <!-- /.sidebar -->
+  </aside>
+
+  <nav class="main-header navbar navbar-expand navbar-white navbar-light">
+    <!-- Left navbar links -->
+    <ul class="navbar-nav">
+      <li class="nav-item">
+        <a class="nav-link" data-widget="pushmenu" role="button"><i class="fas fa-bars"></i></a>
+      </li>
+    </ul>
+
+  </nav>

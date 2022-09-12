@@ -1,0 +1,67 @@
+{% include 'header.html' %}
+
+  <div class="content-wrapper">
+    <!-- Content Header (Page header) -->
+    <section class="content-header">
+      <div class="container-fluid">
+        <div class="row mb-2">
+          <div class="col-sm-6">
+            <h1>All Books</h1>
+          </div>
+        </div>
+      </div><!-- /.container-fluid -->
+    </section>
+
+    <!-- Main content -->
+    <section class="content">
+      <div class="container-fluid">
+        <div class="row">
+          <div class="col-12">
+            <div class="card">
+              <!-- /.card-header -->
+              <div class="card-body">
+                <table id="example2" class="table table-bordered table-hover">
+                  <thead>
+                  <tr>
+                    <th>Index</th>
+                    <th>Type</th>
+                    <th>Email</th>
+                    <th>Action</th>
+                  </tr>
+                  </thead>
+                  <tbody>
+                  {% if admins %}
+                    {% for admin in admins %}
+                      <tr>
+                        <td>{{ admin.id }}</td>
+                        <td>Admin</td>
+                        <td>{{ admin.email }}</td>
+                        <td><a class="btn btn-danger" href="delete_admin?id={{ admin.id }}">Delete</a></td>
+                      </tr>
+                    {% endfor %}
+                  {% endif %}
+                  </tbody>
+                  <tfoot>
+                  <tr>
+                    <th>Index</th>
+                    <th>Type</th>
+                    <th>Email</th>
+                    <th>Action</th>
+                  </tr>
+                  </tfoot>
+                </table>
+              </div>
+              <!-- /.card-body -->
+            </div>
+            <!-- /.card -->
+          </div>
+          <!-- /.col -->
+        </div>
+        <!-- /.row -->
+      </div>
+      <!-- /.container-fluid -->
+    </section>
+    <!-- /.content -->
+  </div>
+
+{% include 'footer.html' %}

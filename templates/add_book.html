@@ -1,0 +1,120 @@
+{% include 'header.html' %}
+
+  <div class="content-wrapper">
+   <section class="content">
+      <div class="container-fluid">
+        <div class="row">
+          <!-- left column -->
+          <div class="col-md-12">
+            <!-- general form elements -->
+            <div class="card card-primary">
+              <div class="card-header">
+                <h3 class="card-title">Add Book</h3>
+              </div>
+              <!-- /.card-header -->
+              <!-- form start -->
+              <form action='add_book' method="POST">
+                {% csrf_token %}
+                <div class="card-body">
+                  <div class="form-group">
+                    <label >Book Name</label>
+                    <input type="text" name="book_name" class="form-control" placeholder="Enter Book Name">
+                  </div>
+                  <div class="form-group">
+                    <label >Author name</label>
+                    <input type="text" name="author_name" class="form-control"  placeholder="Enter Author name">
+                  </div>
+                  <div class="form-group">
+                    <label >Date</label>
+                    <input type="date" name="date" class="form-control" placeholder="Enter Date">
+                  </div>
+                </div>
+                <!-- /.card-body -->
+                <div class="card-footer">
+                  <button type="submit" class="btn btn-primary">Submit</button>
+                </div>
+                {% if messages %}
+                  {% for msg in messages %}
+                    <h2 style="color: red;">{{ msg }}</h2>
+                  {% endfor %}
+                {% endif %}
+              </form>
+            </div>
+            <!-- /.card -->
+
+          </div>
+          <!--/.col (left) -->
+        </div>
+        <!-- /.row -->
+      </div><!-- /.container-fluid -->
+   </section>
+  </div>
+
+  <div class="content-wrapper">
+    <!-- Content Header (Page header) -->
+    <section class="content-header">
+      <div class="container-fluid">
+        <div class="row mb-2">
+          <div class="col-sm-6">
+            <h1>All Books</h1>
+          </div>
+        </div>
+      </div><!-- /.container-fluid -->
+    </section>
+
+    <!-- Main content -->
+    <section class="content">
+      <div class="container-fluid">
+        <div class="row">
+          <div class="col-12">
+            <div class="card">
+              <!-- /.card-header -->
+              <div class="card-body">
+                <table id="example2" class="table table-bordered table-hover">
+                  <thead>
+                  <tr>
+                    <th>Sr No.</th>
+                    <th>Book Name</th>
+                    <th>Author name</th>
+                    <th>Issue Date</th>
+                    <th>Action</th>
+                  </tr>
+                  </thead>
+                  <tbody>
+                  {% if books %}
+                    {% for book in books %}
+                      <tr>
+                        <td>{{ book.id }}</td>
+                        <td>{{ book.book_name }}</td>
+                        <td>{{ book.author_name }}</td>
+                        <td>{{ book.date }}</td>
+                        <td><a class="btn btn-primary" href="edit_book?id={{ book.id }}">Edit</a> | <a class="btn btn-danger" href="delete_book?id={{ book.id }}">Delete</a></td>
+                      </tr>
+                    {% endfor %}
+                  {% endif %}
+                  </tbody>
+                  <tfoot>
+                  <tr>
+                    <th>Sr No.</th>
+                    <th>Book Name</th>
+                    <th>Author name</th>
+                    <th>Issue Date</th>
+                    <th>Action</th>
+                  </tr>
+                  </tfoot>
+                </table>
+              </div>
+              <!-- /.card-body -->
+            </div>
+            <!-- /.card -->
+          </div>
+          <!-- /.col -->
+        </div>
+        <!-- /.row -->
+      </div>
+      <!-- /.container-fluid -->
+    </section>
+    <!-- /.content -->
+  </div>
+
+{% include 'footer.html' %}
